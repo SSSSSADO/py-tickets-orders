@@ -162,12 +162,9 @@ class OrderSerializer(serializers.ModelSerializer):
         user = self.context["request"].user
         order = Order.objects.create(user=user)
 
-        tickets = [
-            Ticket(order=order, **ticket)
-            for ticket in tickets_data
-        ]
+        for ticket_data in tickets_data:
+            Ticket.objects.create(order=order, **ticket_data)
 
-        Ticket.objects.bulk_create(tickets)
         return order
 
 
