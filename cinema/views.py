@@ -96,8 +96,6 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(show_time__date=date)
         if movie:
             queryset = queryset.filter(movie__id=movie)
-        if self.action == "list":
-            queryset = queryset.select_related("movie", "cinema_hall")
         return queryset
 
 
